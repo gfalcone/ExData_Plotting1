@@ -19,20 +19,26 @@ main <- function() {
     
     ## Subset it
     
-   
+    
     data <- subset(data, data$Date == "1/2/2007" | data$Date == "2/2/2007")
     
     ## Convert it
     
     data$Time <- strptime(paste(data$Date,data$Time), format="%d/%m/%Y%H:%M:%S")
     data[,1] <- as.Date(data[,1],format="%d/%m/%Y")
-    data[,3] <- as.numeric(as.character(data[,3]))
+    data[,7] <- as.numeric(as.character(data[,7]))
+    data[,8] <- as.numeric(as.character(data[,8]))
+    data[,9] <- as.numeric(as.character(data[,9]))
     
     ## Now we can plot it !
+    png(file="plot3.png")
+    with(data,plot(y=data$Sub_metering_1,x=data$Time, type="l",col="black", ylab="Energy sub metering", xlab=""))
+    with(data, lines(y=data$Sub_metering_2, x=data$Time, type="l", col="red"))
+    with(data, lines(y=data$Sub_metering_3, x=data$Time, type="l", col="blue"))
     
-    png(file="plot1.png", width=480,height=480)
-    with(data, hist(Global_active_power, col="red", breaks=12,main="Global active power", xlab="Global Active Power (kilowatts)"))
+    with(data, legend("topright",legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), col=c("black","red","blue"), pch=c("-","-","-")))
     dev.off()
+    
     
     
 }

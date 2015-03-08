@@ -19,7 +19,7 @@ main <- function() {
     
     ## Subset it
     
-   
+    
     data <- subset(data, data$Date == "1/2/2007" | data$Date == "2/2/2007")
     
     ## Convert it
@@ -30,8 +30,8 @@ main <- function() {
     
     ## Now we can plot it !
     
-    png(file="plot1.png", width=480,height=480)
-    with(data, hist(Global_active_power, col="red", breaks=12,main="Global active power", xlab="Global Active Power (kilowatts)"))
+    png(file="plot2.png", width=480,height=480)
+    with(data, plot(y=Global_active_power,x=Time, type="l",col="black", ylab="Global Active Power (kilowatts)"))
     dev.off()
     
     
